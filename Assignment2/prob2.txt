@@ -1,0 +1,10 @@
+1. Ans:
+   setImmediate schedules callback to run at check phase while setImmediate schedules callback after timer phase. In the cart we can see timer phase is at top while
+   check phase is after i/o operation phase. Mostly our operations are in i/o phase so check phase comes faster than timer phase usually. So, we want to use setImmediate
+   rather than setTimeout sometimes.
+
+2. Ans:
+    process.nextTick is in different queue(priority) outside event loop. while setImmediate is inside event loop. So, process.nextTick always processes first than setImmediate.
+
+3. Ans:
+        Buffer, Domain, Module, Global, Http, Url, setInterval, setTimeout, Util, Path, Os, Escape, Tty, Set, WeakMap, Cluster

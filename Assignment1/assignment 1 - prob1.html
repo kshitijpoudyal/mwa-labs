@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li date-time="5:17">ECMA6 Video</li>
+        <li date-time="8:22">Node Video</li>
+        <li date-time="3:34">Node Video</li>
+        <li date-time="4:26">ECMA6 Video</li>
+    </ul>
+
+<script>
+    window.onload = function () {
+
+        function itemFunction() {
+            const item = Array.from(document.querySelectorAll('[date-time]'));
+
+            function selectECMA6(i) {
+                return i.innerHTML==="ECMA6 Video";
+            }
+            function getTime(i) {
+                let dateTime = i.getAttribute("date-time");
+                let minSec = dateTime.split(":");
+                return minSec[0]*60+minSec[1];
+            }
+
+            function totalSec(i,j) {
+                return i+j;
+            }
+
+            const selected = item.filter(selectECMA6)
+                .map(getTime).reduce(totalSec,0);
+
+            console.log(selected);
+
+
+        }
+
+        itemFunction();
+    }
+
+</script>
+</body>
+</html>

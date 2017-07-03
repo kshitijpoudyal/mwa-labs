@@ -1,0 +1,13 @@
+//
+   Created by kcp on 7/3/17.
+extends layout
+
+block content
+    h1= title
+
+    form(method='POST' action='/newsletter')
+        input(type='text', placeholder='name@email.com' name='email')
+        input(type='submit', value='Subscribe')
+        input(type='hidden', name='_csrf', value='#{csrftoken}')
+        if error
+            label= error

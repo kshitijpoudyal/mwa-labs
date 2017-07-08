@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!-- Created by kcp on 7/5/17.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Location</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="/javascripts/jquery-gmaps-latlon-picker.js"></script>
+</head>
+<body>
+<section class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1>Let's Learn CRUD Operation for MongoDB!!</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <section id="add">
+            <aside class="col-md-6">
+                <fieldset class="gllpLatlonPicker">
+                    <input type="text" class="gllpSearchField">
+                    <input type="button" value="search" class="gllpSearchButton btn btn-default">
+                    <div class="gllpMap">Google Maps</div>
+                    <input form="form" name="lat" type="hidden" value="20" class="gllpLatitude">
+                    <input form="form" name="long" type="hidden" value="20" class="gllpLongitude">
+                    <input type="hidden" value="3" class="gllpZoom">
+                </fieldset>
+            </aside>
+            <aside class="col-md-6">
+                <form id="form" method="post" action="/search">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" placeholder="Name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input id="category" name="category" type="text" placeholder="Category" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-default">Add</button>
+                </form>
+            </aside>
+        </section>
+    </div><br>
+    <div class="row">
+        <section id="delete" class="col-md-12">
+            <div class="jumbotron">
+                <ul>
+                    <form method="post" action="/search">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Check me out
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <div class="row">
+        <section id="update" class="col-md-12">
+            <div class="jumbotron">
+
+                    <form method="post" action="/search">
+                        <ul>
+                            <li>aaa<button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </button></li>
+                        </ul>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+
+            </div>
+        </section>
+    </div>
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Update Location</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formUpdate" method="post" action="/update">
+                        <div class="form-group">
+                            <label for="nameUpdate">Name</label>
+                            <input id="nameUpdate" name="name" type="text" placeholder="Name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryUpdate">Category</label>
+                            <input id="categoryUpdate" name="category" type="text" placeholder="Category" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button form="formUpdate" type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

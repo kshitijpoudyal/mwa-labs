@@ -1,0 +1,89 @@
+extends layout
+
+block content
+  .row
+    .jumbotron
+        h1.text-center Let's Learn CRUD Operation for MongoDB!!
+  section.container
+    .row
+      section#search
+        .jumbotron
+          h2 Search Nearby Locations:
+          form.text-center.form-inline
+            .form-group
+              label.sr-only(for='categorySearch') Category*:
+              input#categorySearch.form-control(name='categorySearch',type='text', placeholder='Category')
+            .form-group
+              label.sr-only(for='nameSearch') Name:
+              input#nameSearch.form-control(name='nameSearch', type='text', placeholder='Name')
+            button#searchForm.btn.btn-success(type='submit') Search
+          #message
+          #location
+    br
+    .row
+      h2 Add Location:
+      section#add
+        aside.col-md-6
+          fieldset.gllpLatlonPicker
+            input.gllpSearchField.form-control(type='text')
+            input.gllpSearchButton.btn.btn-success(type='button', value='search')
+            .gllpMap Google Maps
+            input.gllpLatitude(form='form', type='hidden',name='lat' value='20')
+            input.gllpLongitude(form='form', name='long', type='hidden', value='20')
+            input.gllpZoom(type='hidden', value='3')
+        aside.col-md-6
+          form#form(method='post', action='/add')
+            .form-group
+              label(for='name') Name
+              input#name.form-control(name='name', type='text', placeholder='Name')
+            .form-group
+              label(for='category') Category
+              input#category.form-control(name='category', type='text', placeholder='Category')
+            button.btn.btn-primary(type='submit') Add
+    br
+    .row
+      section#delete.col-md-12
+        .jumbotron
+          h2 Delete Locations:
+          form(method='post', action='/delete')
+            for info in data
+              .checkbox
+                label
+                  input(type='checkbox' name='deleteSelect[]' value=info._id)
+                  |  !{info.name}
+            button.btn.btn-danger(type='submit') Delete
+
+    .row
+      section#update.col-md-12
+        .jumbotron
+          h2 Update Locations:
+          form(method='post', action='/update')
+            ul
+              for info in data
+                li: !{info.name}
+                  a
+                    span.btn-link.glyphicon.glyphicon-edit.text-primary.editbtn(type='button', name=JSON.stringify(info), data-toggle='modal', data-target='#myModal')
+
+        #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+          .modal-dialog(role='document')
+            .modal-content
+              .modal-header
+                h4#myModalLabel.modal-title Update Location
+              .modal-body
+                form#formUpdate(method='post', action='/update')
+                  .form-group
+                    label(for='nameUpdate') Name
+                    input#nameUpdate.form-control(name='nameUpdate', type='text', placeholder='Name')
+                  .form-group
+                    label(for='categoryUpdate') Category
+                    input#categoryUpdate.form-control(name='categoryUpdate', type='text', placeholder='Category')
+                  .form-group
+                    label(for='longitudeUpdate') Latitude
+                    input#longitudeUpdate.form-control(name='longitudeUpdate', type='text', placeholder='Longitude')
+                  .form-group
+                    label(for='latitudeUpdate') Latitude
+                    input#latitudeUpdate.form-control(name='latitudeUpdate', type='text', placeholder='Latitude')
+                    input(id='_id' name='_id', type='hidden', value='aa')
+              .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal') Close
+                button.btn.btn-primary(form='formUpdate', type='submit') Save changes

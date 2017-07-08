@@ -51,19 +51,21 @@ router.get('/', function(req, res, next) {
     //4
     db.zips.aggregate([
         {$group:{
-                '_id':{state:'$state','city': '$city'},
-                'minPopulation':{$min:'$pop'}
-            }
-        },
-        {
-            $project:{
-                city:'$_id.city',
-                pop:'$minPopulation'
-            }
-        }
-    ],function (err,data) {
+                    '_id':{state:'$state','city': '$city'},
+                    'minPopulation':{$sum:'$pop'}
+        }},
+        {$sort:{
+                '_id.state':1,'minPopulation':1
+        }},
+        {$group:{
+                _id:'_id.state',
+                city:{$first:'$_id.city'},
+                minPopulation:{$first:'$minPopulation'}
+        }},
+        {$sort:{'_id':1}}
+        ],function (err,data) {
         console.log(data);
-    });
+        });
 
   res.send('respond with a resource');
 });

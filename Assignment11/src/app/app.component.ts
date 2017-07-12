@@ -7,8 +7,12 @@ import {Component, EventEmitter} from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  num:number;
   value:number;
   counterChange(value){
     this.value=value;
+  }
+  fun(val){
+    console.log(val);
   }
 }

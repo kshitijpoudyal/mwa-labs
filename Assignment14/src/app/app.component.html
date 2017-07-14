@@ -1,0 +1,22 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" [formControl]="myForm.controls['name']" id="name" [(ngModel)]=user.name placeholder="Name">
+    <small *ngIf="!myForm.controls['name'].valid" class="form-text text-muted text-danger">Required</small>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" [formControl]="myForm.controls['email']" id="email" aria-describedby="emailHelp" [(ngModel)]=user.email placeholder="Enter email">
+    <small *ngIf="!myForm.controls['email'].valid" class="form-text text-muted text-danger">Required</small>
+  </div>
+
+  <div class="form-group">
+    <label for="post">Post</label>
+    <textarea class="form-control" [formControl]="myForm.controls['post']" id="post"  [(ngModel)]=user.post rows="3"></textarea>
+    <small *ngIf="!myForm.controls['post'].valid" class="form-text text-muted text-danger">Minimum length 10</small>
+  </div>
+
+  <button [disabled]="!myForm.valid" class="btn btn-primary">Submit</button>
+  <button class="btn btn-primary" (click)="getData()">Get Data</button>
+</form>
